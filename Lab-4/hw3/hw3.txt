@@ -1,0 +1,55 @@
+use the_office;
+
+create table employees
+(
+employee_id char(10),
+first_name varchar(20),
+last_name varchar(20),
+email varchar(60),
+phone_number char(14),
+hire_date date,
+job_id char(10),
+salary int,
+commission_pct decimal(5,3),
+manager_id char(10),
+department_id char(10)
+);
+
+describe employees;
+
+INSERT INTO employees VALUES 
+('EMP001', 'Michael','Scott', 'michael.scott11@gmail.com', '01812345678', '1999-09-20','JOB001', 1000, 5.125, 'MNG001', 'DPT001'),
+('EMP002', 'Jim', 'Harper', 'jim.harper12@gmail.com', '01712345678', '2004-09-30', 'JOB002', 15000, 4.125, 'MNG002', 'DPT007'), 
+('EMP003', 'Pam', 'Beesly', 'pam.beesly13@gmail.com', '01912345678', '2003-09-30', 'JOB003', 2500, 3.125, 'MNG003', 'DPT003'),
+('EMP004', 'Angela', 'Martin', 'angela.martin14@gmail.com', '01512345678', '2005-09-28', 'JOB004', 65000, 2.125, 'MNG004', 'DPT002'),
+('EMP005', 'Dwight', 'Shrute', 'dwight.shrute15@gmail.com', '01612345678', '2003-09-30', 'JOB005', 3500, 1.125, 'MNG005', 'DPT007'),
+('EMP006', 'Kelly', 'Kapoor', 'kelly.kapoor16@gmail.com', '01412345678', '2003-09-30', 'JOB006', 20000, 6.125, 'MNG006', 'DPT006'),
+('EMP007', 'Andrew', 'Bernard', 'andrew.bernard17@gmail.com', '01312345678', '2007-05-10', 'JOB007', 50000, 7.125, 'MNG007', 'DPT004'),
+('EMP008', 'Kevin', 'Malone', 'kevin.malone18@gmail.com', '01212345678', '2004-10-30', 'JOB008', 12500, 8.125, 'MNG008', 'DPT005'),
+('EMP009', 'Toby', 'Flender', 'toby.flender19@gmail.com', '01832345678', '2004-09-30', 'JOB009', 1750, 9.125, 'MNG009', 'DPT007'),
+('EMP010', 'Phyllis', 'Vance', 'phyllis.vance20@gmail.com', '01732345678', '1999-09-20', 'JOB010', 61000, 6.625, 'MNG010', 'DPT005'),
+('EMP011', 'Creed', 'Bratton', 'creed.bratton21@gmail.com', '01932345678', '1980-06-01', 'JOB011', 2250, 5.625, 'MNG011', 'DPT004');
+
+1.
+Select first_name, last_name, email, phone_number, hire_date, department_id from employees where hire_date = (select max(hire_date) from employees);
+
+2.
+Select first_name, last_name, employee_id, phone_number, salary as lowest_salary, department_id from employees group by department_id having min(salary);
+
+3.
+Select first_name, last_name, employee_id, commission_pct, department_id from employees where department_id = 'DPT007' and commission_pct < all (select commission_pct from employees where department_id = 'DPT005');
+
+4.
+Select distinct department_id, count(*) as sum_employees from employees where salary < 30000 group by department_id; 
+
+5.
+Select department_id,job_id,commission_pct from employees E1 where not exists 
+(select * from employees E2 where E1.department_id = E2.department_id and 
+E1.job_id != E2.job_id and E1.commission_pct > E2.commission_pct) group by 
+department_id;
+
+6.
+Select manager_id from employees where salary >= 3500;
+
+7. 
+Select first_name, last_name, employee_id,email,salary,department_id,commission_pct from employees where (manager_id,commission_pct) in (select manager_id,min(commission_pct) from employees group by manager_id);

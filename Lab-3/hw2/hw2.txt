@@ -1,0 +1,22 @@
+mysql -u root -p
+show databases;
+use lab_hw1;
+show tables;
+select * from developers;
+1. 
+select distinct joining_date from developers order by joining_date;
+
+2.
+select name, email from developers order by followers desc limit 5;
+
+3. 
+select multiplier, count(*) as no_of_developers from developers group by multiplier;
+
+4. 
+select name from developers where followers < 700000 and multiplier in (select max(multiplier) from developers where followers < 700000);
+
+5. 
+select avg(followers) as avg_no_of_followers from developers where joining_date < '2020-06-11';
+
+6.
+select member_id, name, email, followers from developers where email like '%.com' or email like '%.net';

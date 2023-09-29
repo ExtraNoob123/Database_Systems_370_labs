@@ -1,0 +1,47 @@
+mysql -u root -p
+use the_office;
+Select * from employee;
+
+a)
+Select * from employee where Name like 'a%' or Name like '%e';
+
+b)
+Select * from employee where salary between 40000 and 60000;
+
+c) 
+Select * from employee where joining_date < '2000-01-01';
+
+d)
+Update employee set salary = (salary + (5/100)*salary) 
+where role = 'Sales Executive';
+
+e)
+Select name, (salary + (20/100)*salary) as Michael_bonus from employee 
+where Name = 'Michael Scott';
+
+f)
+Select * from employee order by salary desc;
+
+g)
+Select * from employee order by age asc;
+
+h)
+Select * from employee where age > 35 and joining_date < '2003-01-01';
+
+i)
+Delete from employee where Name = 'Creed Bratton';
+
+j)
+Select * from employee where role like '%executive%';
+
+k)
+Alter table employee change Name Employee_Name varchar(50);
+
+l)
+Alter table employee add Bonus int;
+
+m)
+Alter table employee drop column Bonus;
+
+n)
+Select distinct Role from employee;

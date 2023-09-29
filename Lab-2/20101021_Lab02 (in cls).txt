@@ -1,0 +1,239 @@
+
+Setting environment for using XAMPP for Windows.
+20101021@UB71101PC24 c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 2
+Server version: 10.1.34-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use cse370_grades;
+Database changed
+MariaDB [cse370_grades]> update students set Major = 'CSE' where name = 'Arafat';
+Query OK, 1 row affected (0.09 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [cse370_grades]> select * from students;
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| student_id | name    | major | section | days_present | project_marks | cgpa | submission_date |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| s001       | Abir    | CS    | 1       |           10 |          18.5 | 3.91 | 2018-09-15      |
+| s019       | Naima   | CSE   | 2       |           12 |            20 | 3.70 | 2018-08-14      |
+| s002       | Nafis   | CSE   | 1       |           12 |            20 | 3.86 | 2018-08-15      |
+| s003       | Tasneem | CS    | 1       |            8 |            18 | 3.57 | 2018-09-18      |
+| s004       | Nahid   | ECE   | 2       |            7 |          16.5 | 3.25 | 2018-08-20      |
+| s005       | Arafat  | CSE   | 2       |           11 |            20 | 4.00 | 2018-09-13      |
+| s006       | Tasneem | CSE   | 1       |           12 |          17.5 | 3.70 | 2018-08-15      |
+| s007       | Muhtadi | ECE   | 1       |           10 |            19 | 3.67 | 2018-09-16      |
+| S008       | Farhana | CSE   | 2       |            6 |            15 | 2.67 | 2018-08-16      |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+9 rows in set (0.00 sec)
+
+MariaDB [cse370_grades]> Update students set Name = 'Naheed', Project_marks = 16 where student_id = 's004';
+Query OK, 1 row affected (0.05 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [cse370_grades]> delete from students where name= 'Naima';
+Query OK, 1 row affected (0.07 sec)
+
+MariaDB [cse370_grades]> select * from students;
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| student_id | name    | major | section | days_present | project_marks | cgpa | submission_date |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| s001       | Abir    | CS    | 1       |           10 |          18.5 | 3.91 | 2018-09-15      |
+| s002       | Nafis   | CSE   | 1       |           12 |            20 | 3.86 | 2018-08-15      |
+| s003       | Tasneem | CS    | 1       |            8 |            18 | 3.57 | 2018-09-18      |
+| s004       | Naheed  | ECE   | 2       |            7 |            16 | 3.25 | 2018-08-20      |
+| s005       | Arafat  | CSE   | 2       |           11 |            20 | 4.00 | 2018-09-13      |
+| s006       | Tasneem | CSE   | 1       |           12 |          17.5 | 3.70 | 2018-08-15      |
+| s007       | Muhtadi | ECE   | 1       |           10 |            19 | 3.67 | 2018-09-16      |
+| S008       | Farhana | CSE   | 2       |            6 |            15 | 2.67 | 2018-08-16      |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+8 rows in set (0.00 sec)
+
+MariaDB [cse370_grades]> Delete from students where days_present < 8;
+Query OK, 2 rows affected (0.08 sec)
+
+MariaDB [cse370_grades]> select * from students;
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| student_id | name    | major | section | days_present | project_marks | cgpa | submission_date |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| s001       | Abir    | CS    | 1       |           10 |          18.5 | 3.91 | 2018-09-15      |
+| s002       | Nafis   | CSE   | 1       |           12 |            20 | 3.86 | 2018-08-15      |
+| s003       | Tasneem | CS    | 1       |            8 |            18 | 3.57 | 2018-09-18      |
+| s005       | Arafat  | CSE   | 2       |           11 |            20 | 4.00 | 2018-09-13      |
+| s006       | Tasneem | CSE   | 1       |           12 |          17.5 | 3.70 | 2018-08-15      |
+| s007       | Muhtadi | ECE   | 1       |           10 |            19 | 3.67 | 2018-09-16      |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+6 rows in set (0.00 sec)
+
+MariaDB [cse370_grades]> select student_id, name, project_marks from students;
++------------+---------+---------------+
+| student_id | name    | project_marks |
++------------+---------+---------------+
+| s001       | Abir    |          18.5 |
+| s002       | Nafis   |            20 |
+| s003       | Tasneem |            18 |
+| s005       | Arafat  |            20 |
+| s006       | Tasneem |          17.5 |
+| s007       | Muhtadi |            19 |
++------------+---------+---------------+
+6 rows in set (0.00 sec)
+
+MariaDB [cse370_grades]> select name, project_marks+days_present*5/12 as total_marks from students;
++---------+--------------+
+| name    | total_marks  |
++---------+--------------+
+| Abir    | 22.666666666 |
+| Nafis   |           25 |
+| Tasneem | 21.333333333 |
+| Arafat  | 24.583333333 |
+| Tasneem |         22.5 |
+| Muhtadi | 23.166666666 |
++---------+--------------+
+6 rows in set (0.01 sec)
+
+MariaDB [cse370_grades]> select * from students;
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| student_id | name    | major | section | days_present | project_marks | cgpa | submission_date |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| s001       | Abir    | CS    | 1       |           10 |          18.5 | 3.91 | 2018-09-15      |
+| s002       | Nafis   | CSE   | 1       |           12 |            20 | 3.86 | 2018-08-15      |
+| s003       | Tasneem | CS    | 1       |            8 |            18 | 3.57 | 2018-09-18      |
+| s005       | Arafat  | CSE   | 2       |           11 |            20 | 4.00 | 2018-09-13      |
+| s006       | Tasneem | CSE   | 1       |           12 |          17.5 | 3.70 | 2018-08-15      |
+| s007       | Muhtadi | ECE   | 1       |           10 |            19 | 3.67 | 2018-09-16      |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+6 rows in set (0.00 sec)
+
+MariaDB [cse370_grades]> alter table students add Project_marks+Days_present*5/12 as total_marks from students;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '+Days_present*5/12 as total_marks from students' at line 1
+MariaDB [cse370_grades]> Select Upper(Name), Lower(Name) from students;
++-------------+-------------+
+| Upper(Name) | Lower(Name) |
++-------------+-------------+
+| ABIR        | abir        |
+| NAFIS       | nafis       |
+| TASNEEM     | tasneem     |
+| ARAFAT      | arafat      |
+| TASNEEM     | tasneem     |
+| MUHTADI     | muhtadi     |
++-------------+-------------+
+6 rows in set (0.01 sec)
+
+MariaDB [cse370_grades]> Select Major from students;
++-------+
+| Major |
++-------+
+| CS    |
+| CSE   |
+| CS    |
+| CSE   |
+| CSE   |
+| ECE   |
++-------+
+6 rows in set (0.00 sec)
+
+MariaDB [cse370_grades]> Select distinct Major from Lab_Grades;
++-------+
+| Major |
++-------+
+| CS    |
+| CSE   |
+| ECE   |
++-------+
+3 rows in set (0.04 sec)
+
+MariaDB [cse370_grades]> Select * from students order by name;
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| student_id | name    | major | section | days_present | project_marks | cgpa | submission_date |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| s001       | Abir    | CS    | 1       |           10 |          18.5 | 3.91 | 2018-09-15      |
+| s005       | Arafat  | CSE   | 2       |           11 |            20 | 4.00 | 2018-09-13      |
+| s007       | Muhtadi | ECE   | 1       |           10 |            19 | 3.67 | 2018-09-16      |
+| s002       | Nafis   | CSE   | 1       |           12 |            20 | 3.86 | 2018-08-15      |
+| s003       | Tasneem | CS    | 1       |            8 |            18 | 3.57 | 2018-09-18      |
+| s006       | Tasneem | CSE   | 1       |           12 |          17.5 | 3.70 | 2018-08-15      |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+6 rows in set (0.01 sec)
+
+MariaDB [cse370_grades]> Select * from students order by name desc, Submission_date asc;
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| student_id | name    | major | section | days_present | project_marks | cgpa | submission_date |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| s006       | Tasneem | CSE   | 1       |           12 |          17.5 | 3.70 | 2018-08-15      |
+| s003       | Tasneem | CS    | 1       |            8 |            18 | 3.57 | 2018-09-18      |
+| s002       | Nafis   | CSE   | 1       |           12 |            20 | 3.86 | 2018-08-15      |
+| s007       | Muhtadi | ECE   | 1       |           10 |            19 | 3.67 | 2018-09-16      |
+| s005       | Arafat  | CSE   | 2       |           11 |            20 | 4.00 | 2018-09-13      |
+| s001       | Abir    | CS    | 1       |           10 |          18.5 | 3.91 | 2018-09-15      |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+6 rows in set (0.00 sec)
+
+MariaDB [cse370_grades]> select name, project_marks from students where Majors = 'CSE';
+ERROR 1054 (42S22): Unknown column 'Majors' in 'where clause'
+MariaDB [cse370_grades]> select name, project_marks from students where Major = 'CSE';
++---------+---------------+
+| name    | project_marks |
++---------+---------------+
+| Nafis   |            20 |
+| Arafat  |            20 |
+| Tasneem |          17.5 |
++---------+---------------+
+3 rows in set (0.00 sec)
+
+MariaDB [cse370_grades]> select name, project_marks from students where project_marks between 17 and19;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'and19' at line 1
+MariaDB [cse370_grades]> select name, project_marks from students where project_marks between 17 and 19;
++---------+---------------+
+| name    | project_marks |
++---------+---------------+
+| Abir    |          18.5 |
+| Tasneem |            18 |
+| Tasneem |          17.5 |
+| Muhtadi |            19 |
++---------+---------------+
+4 rows in set (0.00 sec)
+
+MariaDB [cse370_grades]> Select * from students where major in ('CSE', 'CS');
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| student_id | name    | major | section | days_present | project_marks | cgpa | submission_date |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| s001       | Abir    | CS    | 1       |           10 |          18.5 | 3.91 | 2018-09-15      |
+| s002       | Nafis   | CSE   | 1       |           12 |            20 | 3.86 | 2018-08-15      |
+| s003       | Tasneem | CS    | 1       |            8 |            18 | 3.57 | 2018-09-18      |
+| s005       | Arafat  | CSE   | 2       |           11 |            20 | 4.00 | 2018-09-13      |
+| s006       | Tasneem | CSE   | 1       |           12 |          17.5 | 3.70 | 2018-08-15      |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+5 rows in set (0.00 sec)
+
+MariaDB [cse370_grades]> Select * from students where Name like 'a%';
++------------+--------+-------+---------+--------------+---------------+------+-----------------+
+| student_id | name   | major | section | days_present | project_marks | cgpa | submission_date |
++------------+--------+-------+---------+--------------+---------------+------+-----------------+
+| s001       | Abir   | CS    | 1       |           10 |          18.5 | 3.91 | 2018-09-15      |
+| s005       | Arafat | CSE   | 2       |           11 |            20 | 4.00 | 2018-09-13      |
++------------+--------+-------+---------+--------------+---------------+------+-----------------+
+2 rows in set (0.00 sec)
+
+MariaDB [cse370_grades]> Select * from students where Name like '%a%a%';
++------------+--------+-------+---------+--------------+---------------+------+-----------------+
+| student_id | name   | major | section | days_present | project_marks | cgpa | submission_date |
++------------+--------+-------+---------+--------------+---------------+------+-----------------+
+| s005       | Arafat | CSE   | 2       |           11 |            20 | 4.00 | 2018-09-13      |
++------------+--------+-------+---------+--------------+---------------+------+-----------------+
+1 row in set (0.00 sec)
+
+MariaDB [cse370_grades]> Select * from students where name like 'a___';
++------------+------+-------+---------+--------------+---------------+------+-----------------+
+| student_id | name | major | section | days_present | project_marks | cgpa | submission_date |
++------------+------+-------+---------+--------------+---------------+------+-----------------+
+| s001       | Abir | CS    | 1       |           10 |          18.5 | 3.91 | 2018-09-15      |
++------------+------+-------+---------+--------------+---------------+------+-----------------+
+1 row in set (0.00 sec)
+
+MariaDB [cse370_grades]>

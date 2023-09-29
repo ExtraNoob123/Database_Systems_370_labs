@@ -1,0 +1,60 @@
+
+Setting environment for using XAMPP for Windows.
+user@DESKTOP-VLI4E6U d:\new folder\xamp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| cse370_grades      |
+| information_schema |
+| just_a_potato      |
+| lab_hw1            |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+8 rows in set (0.024 sec)
+
+MariaDB [(none)]> use cse370_grades;
+Database changed
+MariaDB [cse370_grades]> select * from students;
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| student_id | name    | major | section | days_present | project_marks | cgpa | submission_date |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+| s001       | Abir    | CS    | 1       |           10 |          18.5 | 3.91 | 2018-09-15      |
+| s002       | Nafis   | CSE   | 1       |           12 |            20 | 3.86 | 2018-08-15      |
+| s003       | Tasneem | CS    | 1       |            8 |            18 | 3.57 | 2018-09-18      |
+| s005       | Arafat  | CSE   | 2       |           11 |            20 | 4.00 | 2018-09-13      |
+| s006       | Tasneem | CSE   | 1       |           12 |          17.5 | 3.70 | 2018-08-15      |
+| s007       | Muhtadi | ECE   | 1       |           10 |            19 | 3.67 | 2018-09-16      |
++------------+---------+-------+---------+--------------+---------------+------+-----------------+
+6 rows in set (0.063 sec)
+
+MariaDB [cse370_grades]> Select min(CGPA) from students;
++-----------+
+| min(CGPA) |
++-----------+
+|      3.57 |
++-----------+
+1 row in set (0.000 sec)
+
+MariaDB [cse370_grades]> Select count(*) as total_students, avg(Project_marks) as average_project_marks from Lab_Grades;
++----------------+-----------------------+
+| total_students | average_project_marks |
++----------------+-----------------------+
+|              1 |                  18.5 |
++----------------+-----------------------+
+1 row in set (0.018 sec)
+
+MariaDB [cse370_grades]>
